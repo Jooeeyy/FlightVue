@@ -35,7 +35,9 @@ app = new Vue({
         // Ausgewählte Flüge
         choosenFlights: [],
         // Linie auf der Map nach ausgewählten Flügen
-        flightLine: null
+        flightLine: null,
+        // Zeigt den Ladebildschirm
+        loading: true
     },
     created: function () {
         // Funktion, die die Flüge lädt beim starten
@@ -73,8 +75,7 @@ app = new Vue({
         //Lädt Flüge
         showOverlay: function () {
 
-            let element = document.getElementById('waitOverlayWrapper');
-            element.style.display = "block";
+            this.loading = true;
 
             this.choosenFlights = [];
             this.updateLine();
@@ -156,8 +157,7 @@ app = new Vue({
                 }
             }
 
-            let element = document.getElementById('waitOverlayWrapper');
-            element.style.display = "none";
+            this.loading = false;
         },
         // Auswahl eines Flughafens starten
         choose: function(e) {
@@ -184,6 +184,8 @@ app = new Vue({
                         });
                         marker.bindTooltip('<em>'+airport.Name+'</em>');
                         marker.addTo(self.mapObject);
+
+                        self.loading = false;
                     }, 100)
 
 
@@ -296,6 +298,15 @@ app = new Vue({
     },
     template: `
 <div class="wrapper">
+<div id="waitOverlayWrapper" v-if="loading">
+    <div id="waitOverlayContent">
+        <img src="media/black-plane.png" id="waitPlane">
+
+        <p class="text-center" style="margin-top:2.8em;">
+            Bitte warten...
+        </p>
+    </div>
+</div>
 <div class="headerBar">
     <form action="http://flights.eliashenrich.de/form.php" method="POST" class="text-center" v-on:submit.prevent="showOverlay()">
         von
