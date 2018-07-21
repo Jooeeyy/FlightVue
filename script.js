@@ -303,7 +303,7 @@ app = new Vue({
         <img src="media/black-plane.png" id="waitPlane">
 
         <p class="text-center" style="margin-top:2.8em;">
-            Bitte warten...
+            Bitte warten... (CORS aktiviert?)
         </p>
     </div>
 </div>
