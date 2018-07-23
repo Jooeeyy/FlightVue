@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Snippet 2</title>
+</head>
+<body>
+
+<div id="content">
+</div>
+<script>
+    var persons = [
+        {
+            "name": "Peter",
+            "age": 20
+        },
+        {
+            "name": "Max",
+            "age": 18
+        }
+    ];
+    for(var i = 0; i < persons.length; ++i) {
+        document.getElementById("content").innerHTML +=
+            ("<h1>"+persons[i].name+"</h1><p>"+persons[i].age+"</p>");
+    }
+</script>
+
+
+</body>
+</html>
